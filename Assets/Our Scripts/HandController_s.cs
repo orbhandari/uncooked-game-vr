@@ -10,7 +10,7 @@ public class HandController_s : MonoBehaviour
 	public HandType handType;
 
 
-	//改成了public
+	//change into public
 	public ObjectAnchor_s objectGrasped;
 
 	public Vector3 initialGrabPosition;

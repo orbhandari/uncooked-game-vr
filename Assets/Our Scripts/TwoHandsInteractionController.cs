@@ -96,8 +96,12 @@ public class TwoHandsInteractionController : MonoBehaviour
                         //lowerHull.transform.position += Vector3.down * 0.1f;
 
 
-                    upperHull.transform.position = objectToSlice.transform.position + Vector3.up * 0.01f;
-                    lowerHull.transform.position = objectToSlice.transform.position + Vector3.down * 0.01f;
+                    //upperHull.transform.position = objectToSlice.transform.position + Vector3.up * 0.01f;
+                    //lowerHull.transform.position = objectToSlice.transform.position + Vector3.down * 0.01f;
+
+                    //cheese no fly
+                    upperHull.transform.position = objectToSlice.transform.position + Vector3.up;
+                    lowerHull.transform.position = objectToSlice.transform.position + Vector3.down;
 
 
                     HandController_s.RefreshAnchorsInScene();
