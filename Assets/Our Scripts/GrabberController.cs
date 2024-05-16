@@ -22,6 +22,9 @@ public class GrabberController : MonoBehaviour
     [SerializeField]
     protected GameObject m_player;
 
+    [SerializeField] 
+    protected Material highlightMaterial; // 高亮显示的材质
+
     protected Vector3 m_lastPos;
     protected Quaternion m_lastRot;
     protected Quaternion m_anchorOffsetRotation;
@@ -63,7 +66,19 @@ public class GrabberController : MonoBehaviour
         m_lastRot = transform.rotation;
 
         float prevFlex = m_prevFlex;
-        m_prevFlex = OVRInput.Get(OVRInput.Axis1D.PrimaryHandTrigger, m_controller);
+        float primaryHandValue = OVRInput.Get(OVRInput.Axis1D.PrimaryHandTrigger, m_controller);
+        float primaryIndexValue = OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger, m_controller);
+
+        Debug.Log($"Primary Trigger: {primaryHandValue}, Secondary Trigger: {primaryIndexValue}");
+
+        bool areBothTriggersPressed = primaryHandValue > 0.5f && primaryIndexValue > 0.5f;
+        m_prevFlex = areBothTriggersPressed ? 1.0f : 0.0f; 
+
+        // float prevFlex = m_prevFlex;
+        // m_prevFlex = OVRInput.Get(OVRInput.Axis1D.PrimaryHandTrigger, m_controller);
+        // Debug.Log($"Primary Trigger: {m_prevFlex}");
+
+        // Debug.Log($"Are Both Triggers Pressed: {areBothTriggersPressed}, m_prevFlex: {m_prevFlex}");
 
         CheckForGrabOrRelease(prevFlex);
     }
@@ -142,6 +157,7 @@ public class GrabberController : MonoBehaviour
             m_grabbedObj = closestGrabbable;
             m_grabbedObj.GrabBegin(this, closestGrabbableCollider);
             m_grabbedObj.transform.SetParent(transform);
+            HighlightObject(m_grabbedObj);
         }
     }
 
@@ -151,6 +167,7 @@ public class GrabberController : MonoBehaviour
         {
             m_grabbedObj.GrabEnd(Vector3.zero, Vector3.zero); // Assuming zero velocity for simplicity
             m_grabbedObj.transform.SetParent(null);
+            UnhighlightObject(m_grabbedObj);
             m_grabbedObj = null;
             Debug.Log("GrabEnd: Rigidbody isKinematic = " + gameObject.GetComponent<Rigidbody>().isKinematic);
         }
@@ -194,6 +211,25 @@ public class GrabberController : MonoBehaviour
 
     public OVRInput.Controller Controller {
         get {  return m_controller; }
+    }
+
+    private void HighlightObject(GrabbableObject obj)
+    {
+        Renderer renderer = obj.GetComponent<Renderer>();
+        if (renderer != null)
+        {
+            obj.originalMaterial = renderer.material;
+            renderer.material = highlightMaterial;
+        }
+    }
+
+    private void UnhighlightObject(GrabbableObject obj)
+    {
+        Renderer renderer = obj.GetComponent<Renderer>();
+        if (renderer != null && obj.originalMaterial != null)
+        {
+            renderer.material = obj.originalMaterial;
+        }
     }
 
 }

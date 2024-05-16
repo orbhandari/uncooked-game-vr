@@ -3966,6 +3966,7 @@ MonoBehaviour:
   m_controller: 1
   m_parentTransform: {fileID: 0}
   m_player: {fileID: 0}
+  highlightMaterial: {fileID: 2100000, guid: aa01522302c4d492da56af0cedf22f80, type: 2}
 --- !u!54 &578624307
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -11504,14 +11505,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00507a6d06ae14de397126c571d7fbe5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grabBegin: 0.55
-  grabEnd: 0.35
+  grabBegin: 0.5
+  grabEnd: 0.5
   m_gripTransform: {fileID: 475774777}
   m_grabVolumes:
   - {fileID: 1677278823}
   m_controller: 2
   m_parentTransform: {fileID: 0}
   m_player: {fileID: 0}
+  highlightMaterial: {fileID: 2100000, guid: aa01522302c4d492da56af0cedf22f80, type: 2}
 --- !u!54 &1677278825
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -20080,7 +20082,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sliceSoundClip: {fileID: 8300000, guid: 328a47848c01e40da9eda13dec255578, type: 3}
-  volume: 50
+  volume: 100
   startSlicePoint: {fileID: 730058539}
   endSlicePoint: {fileID: 1494051833}
   velocityEstimator: {fileID: 1494051834}
@@ -20133,6 +20135,7 @@ MonoBehaviour:
   m_allowOffhandGrab: 1
   m_grabPoints:
   - {fileID: 6483958792177433647}
+  originalMaterial: {fileID: 0}
 --- !u!1001 &6520545537914623510
 PrefabInstance:
   m_ObjectHideFlags: 0

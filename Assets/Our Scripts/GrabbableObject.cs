@@ -1,30 +1,6 @@
-/*
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- * All rights reserved.
- *
- * Licensed under the Oculus SDK License Agreement (the "License");
- * you may not use the Oculus SDK except in compliance with the License,
- * which is provided at the time of installation or download, or which
- * otherwise accompanies this software in either electronic or hard copy form.
- *
- * You may obtain a copy of the License at
- *
- * https://developer.oculus.com/licenses/oculussdk/
- *
- * Unless required by applicable law or agreed to in writing, the Oculus SDK
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 using System;
 using UnityEngine;
 
-/// <summary>
-/// An object that can be grabbed and thrown by OVRGrabber.
-/// </summary>
-[HelpURL("https://developer.oculus.com/reference/unity/latest/class_o_v_r_grabbable")]
 public class GrabbableObject : MonoBehaviour
 {
     [SerializeField]
@@ -38,6 +14,8 @@ public class GrabbableObject : MonoBehaviour
     protected Collider m_grabbedCollider = null;
     protected GrabberController m_grabbedBy = null;
 
+    public Material originalMaterial; // 用于存储原始材质
+
     /// <summary>
     /// If true, the object can currently be grabbed.
     /// </summary>
@@ -46,49 +24,30 @@ public class GrabbableObject : MonoBehaviour
         get { return m_allowOffhandGrab; }
     }
 
-    /// <summary>
-    /// If true, the object is currently grabbed.
-    /// </summary>
     public bool isGrabbed
     {
         get { return m_grabbedBy != null; }
     }
 
-    /// <summary>
-    /// Returns the GrabberController currently grabbing this object.
-    /// </summary>
     public GrabberController grabbedBy
     {
         get { return m_grabbedBy; }
     }
-
-    /// <summary>
-    /// The transform at which this object was grabbed.
-    /// </summary>
     public Transform grabbedTransform
     {
         get { return m_grabbedCollider.transform; }
     }
 
-    /// <summary>
-    /// The Rigidbody of the collider that was used to grab this object.
-    /// </summary>
     public Rigidbody grabbedRigidbody
     {
         get { return m_grabbedCollider.attachedRigidbody; }
     }
-
-    /// <summary>
-    /// The contact point(s) where the object was grabbed.
-    /// </summary>
     public Collider[] grabPoints
     {
         get { return m_grabPoints; }
     }
 
-    /// <summary>
-    /// Notifies the object that it has been grabbed.
-    /// </summary>
+
     virtual public void GrabBegin(GrabberController hand, Collider grabPoint)
     {
         m_grabbedBy = hand;
@@ -123,6 +82,12 @@ public class GrabbableObject : MonoBehaviour
 
             // Create a default grab point
             m_grabPoints = new Collider[1] { collider };
+
+            Renderer renderer = GetComponent<Renderer>();
+            if (renderer != null)
+            {
+                originalMaterial = renderer.material; // 存储初始材质
+            }
         }
     }
 
