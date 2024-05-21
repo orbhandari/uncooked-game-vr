@@ -63,7 +63,8 @@ public class RayInteracter : MonoBehaviour
 
                 if (OVRInput.GetDown(OVRInput.RawButton.LIndexTrigger))
                 {
-                    // TODO: Load tutorial scene
+                    // Load scene
+                    transitionManager.GoToSceneAsync(2);
                 }
             }
             else if (hit.collider.gameObject.tag == "StartGame")
@@ -77,7 +78,6 @@ public class RayInteracter : MonoBehaviour
                 if (OVRInput.GetDown(OVRInput.RawButton.LIndexTrigger))
                 {
                     // Load scene
-                    Debug.Log("Calling Go to Scene Async.");
                     transitionManager.GoToSceneAsync(1);
                 }
             } else
