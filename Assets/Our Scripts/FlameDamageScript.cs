@@ -23,7 +23,7 @@ public class FlameDamageScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log("cook prog: " + cookProgress);
+        // No-op
     }
 
     private void OnParticleCollision(GameObject particle)
@@ -36,6 +36,7 @@ public class FlameDamageScript : MonoBehaviour
         {
             Cook();
         }
+        Debug.Log("cook progress: " + cookProgress);
     }
 
     void Cook()
@@ -54,7 +55,8 @@ public class FlameDamageScript : MonoBehaviour
     // Destroys the raw objects and spawns in the cooked pizza
     void CreatePizza()
     {
-        //DestroyObjectsOnDough();
+        // Destory all gameobjects on the dough
+        DestroyObjectsOnDough();
 
         // Destroy the pizza dough itself? Set to inactive for now
         this.GetComponent<Renderer>().enabled = false;
@@ -64,9 +66,14 @@ public class FlameDamageScript : MonoBehaviour
         cooked_pizza.GetComponent<Renderer>().enabled = true;
 
         // Play smoke effect
+        if (smokeEffect)
+        {
+            smokeEffect.transform.position = this.transform.position + new Vector3(0, 2, 0);
+            smokeEffect.Play();
+        }
 
         // Play cooking sound
-        if (audioSource)
+        if (audioSource && !audioSource.isPlaying)
         {
             audioSource.Play();
         }
@@ -78,10 +85,7 @@ public class FlameDamageScript : MonoBehaviour
     {
         Debug.Log("Collision enter");
         // Check if the object has a Rigidbody to consider it as a valid object
-        if (collision.rigidbody != null)
-        {
-            objectsOnDough.Add(collision.gameObject);
-        }
+        objectsOnDough.Add(collision.gameObject);
     }
 
     private void OnCollisionExit(Collision collision)
@@ -95,6 +99,7 @@ public class FlameDamageScript : MonoBehaviour
 
     public void DestroyObjectsOnDough()
     {
+        Debug.Log("Destorying objects");
         foreach (GameObject obj in objectsOnDough)
         {
             Destroy(obj);

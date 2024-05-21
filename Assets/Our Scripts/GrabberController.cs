@@ -69,7 +69,7 @@ public class GrabberController : MonoBehaviour
         float primaryHandValue = OVRInput.Get(OVRInput.Axis1D.PrimaryHandTrigger, m_controller);
         float primaryIndexValue = OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger, m_controller);
 
-        Debug.Log($"Primary Trigger: {primaryHandValue}, Secondary Trigger: {primaryIndexValue}");
+        //Debug.Log($"Primary Trigger: {primaryHandValue}, Secondary Trigger: {primaryIndexValue}");
 
         bool areBothTriggersPressed = primaryHandValue > 0.5f && primaryIndexValue > 0.5f;
         m_prevFlex = areBothTriggersPressed ? 1.0f : 0.0f; 

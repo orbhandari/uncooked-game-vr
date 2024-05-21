@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Grabbable
   - Teleportable
+  - StartTutorial
+  - StartGame
+  - BackToMenu
   layers:
   - Default
   - TransparentFX

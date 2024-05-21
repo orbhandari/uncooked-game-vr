@@ -130,12 +130,11 @@ public class Mounting : MonoBehaviour
             summonedCat = Instantiate(catMount, player.transform.position, player.transform.rotation);
             Debug.Log("Instantiated cat mount.");
 
-            // TODO: Play smoke effect
             if (summonEffect != null)
             {
                 Debug.Log("Playing summon effect.");
                 summonEffect.transform.position = player.transform.position;
-                summonEffect.transform.localPosition = player.transform.position - new Vector3(0, 1.0f, 0);
+                summonEffect.transform.localPosition = player.transform.position - new Vector3(0, 2.0f, 0);
                 summonEffect.Play();
             }
 

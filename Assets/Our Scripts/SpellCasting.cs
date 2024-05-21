@@ -60,6 +60,9 @@ public class SpellCasting : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        flame.transform.position = fireEmitter.transform.position;
+        flame.transform.forward = transform.forward;
+
         // Check if holding down (long press) the right index trigger
         if (OVRInput.Get(OVRInput.RawButton.RIndexTrigger) && OVRInput.Get(OVRInput.Axis1D.SecondaryHandTrigger) < clashPreventionThreshold)
         {
@@ -187,14 +190,11 @@ public class SpellCasting : MonoBehaviour
 
         if (flame)
         {
-            //flame.transform.SetParent(this.transform);
-            //flame.transform.localPosition = Vector3.zero;
-            //flame.transform.forward = transform.forward;
-            //flame.Play();
+            flame.Play();
 
             flame.transform.position = fireEmitter.transform.position;
             flame.transform.forward = transform.forward;
-            flame.transform.SetParent(fireEmitter.transform);
+            //flame.transform.SetParent(fireEmitter.transform);
             flame.Play();
         }
 
@@ -257,11 +257,6 @@ public class SpellCasting : MonoBehaviour
 
 
         rayScript.UnselectObject(selectedObject);
-
-        // TODO: Test this: Make selected object now sliceable
-        //int sliceableLayer = LayerMask.NameToLayer("Slicable");
-        //selectedObject.layer = sliceableLayer;
-        //Debug.Log("Current layer: " + gameObject.layer);
     }
 
     void CastEnlargeSpell()
@@ -305,7 +300,5 @@ public class SpellCasting : MonoBehaviour
         }
 
         rayScript.UnselectObject(selectedObject);
-
-        // TODO: Test this: Make selected object no longer sliceable
     }
 }

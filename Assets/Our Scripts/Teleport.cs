@@ -6,19 +6,41 @@ using UnityEngine;
 public class Teleport : MonoBehaviour
 {
     // Attributes for ray pointer
-    [Header( "Ray Properties" )]
+    [Header("Ray Properties")]
     public LineRenderer lineRenderer;
     private Material defaultLineMat;
     public Material teleportableLineMat; // Indicates the material used when pointing at a teleportable surface
     public float maxDistance = 10f; // Maximum distance for the raycast
 
-    [Header( "Others" )]
+    [Header("Others")]
     public OVRPlayerController player;
     public GameObject teleportTargetPointer;
+    public TransitionManager transitionManager;
 
     private Renderer teleportTargetPointerRenderer;
     private Vector3 teleportTarget = new Vector3();
     private bool aboutToTeleport = false;
+
+    private bool isSelecting = false;
+    
+
+    void StartVibration()
+    {
+        float vibrationIntensity = 0.5f;
+
+        // Trigger vibration on highlight
+        OVRInput.SetControllerVibration(vibrationIntensity, vibrationIntensity, OVRInput.Controller.LTouch);
+        OVRInput.SetControllerVibration(vibrationIntensity, vibrationIntensity, OVRInput.Controller.RTouch);
+        Invoke("StopVibration", 0.01f);
+    }
+
+    void StopVibration()
+    {
+
+        // Stop haptic feedback on both controllers
+        OVRInput.SetControllerVibration(0, 0, OVRInput.Controller.LTouch);
+        OVRInput.SetControllerVibration(0, 0, OVRInput.Controller.RTouch);
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -44,12 +66,28 @@ public class Teleport : MonoBehaviour
             lineRenderer.SetPosition(0, transform.position); // Start position
             lineRenderer.SetPosition(1, hit.point); // End position (where the ray hits)
 
-            if (hit.collider.gameObject.tag == "Teleportable")
+            if (hit.collider.gameObject.tag == "BackToMenu")
             {
+                if (!isSelecting)
+                {
+                    StartVibration();
+                    isSelecting = true;
+                }
+
+                if (OVRInput.GetDown(OVRInput.RawButton.LIndexTrigger))
+                {
+                    // Load scene
+                    Debug.Log("Calling Go to Scene Async.");
+                    transitionManager.GoToSceneAsync(0);
+                }
+            }
+            else if (hit.collider.gameObject.tag == "Teleportable")
+            {
+                isSelecting = false;
                 // Here we assume ray hits a teleportable surface
                 lineRenderer.material = teleportableLineMat;
 
-                if (OVRInput.Get(OVRInput.RawButton.Y))
+                if (OVRInput.GetDown(OVRInput.RawButton.Y))
                 {
                     aboutToTeleport = true;
                     teleportTarget = hit.point;
@@ -59,8 +97,17 @@ public class Teleport : MonoBehaviour
                     teleportTargetPointer.transform.position = hit.point;
                 }
             }
+            else
+            {
+                isSelecting = false;
+            }
+
         }
-        else lineRenderer.enabled = false;
+        else
+        {
+            isSelecting = false;
+            lineRenderer.enabled = false;
+        }
 
         if (OVRInput.GetUp(OVRInput.RawButton.Y) && aboutToTeleport)
         {

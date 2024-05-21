@@ -103,6 +103,11 @@ public class TwoHandsInteractionController : MonoBehaviour
                     upperHull.transform.position = objectToSlice.transform.position + Vector3.up;
                     lowerHull.transform.position = objectToSlice.transform.position + Vector3.down;
 
+                    // cheese pieces no collide with player
+                    int objectLayer = LayerMask.NameToLayer("Objects");
+                    upperHull.layer = objectLayer;
+                    lowerHull.layer = objectLayer;
+
 
                     HandController_s.RefreshAnchorsInScene();
 
