@@ -9,10 +9,10 @@ EditorBuildSettings:
     path: Assets/Main menu.unity
     guid: cae9a949b8a104ce58d1223ba7d2d246
   - enabled: 1
-    path: Assets/FR_KitchenRoom_V1.0/Scenes/FR_KitchenRoom_V1.0.unity
+    path: Assets/Scenes/FR_KitchenRoom_V1.0.unity
     guid: 4a7f275a9fb510d4e88f5a12138139fa
   - enabled: 1
-    path: Assets/FR_KitchenRoom_V1.0/Scenes/Tutorial.unity
+    path: Assets/Scenes/Tutorial.unity
     guid: e544de29969e9427ebe77bdfb398fe77
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 8f56f36d3602a43099aa9c6f0398b3a5, type: 2}
