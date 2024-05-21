@@ -92,10 +92,11 @@ public class Mounting : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (OVRInput.GetDown(OVRInput.RawButton.B) && !isJumping && mounted)
-        {
-            StartJump();
-        }
+        // KIV: Disabled jump
+        // if (OVRInput.GetDown(OVRInput.RawButton.B) && !isJumping && mounted)
+        // {
+        //     StartJump();
+        // }
 
         if (isJumping)
         {

@@ -130,9 +130,7 @@ public class DistanceGrab : MonoBehaviour
         // Default line color when pointing at uninteractive surfaces
         lineRenderer.material = defaultLineMat;
 
-        // Hack by Om: Changed the commented (original) line 
-        //if (OVRInput.Get(OVRInput.Axis1D.SecondaryHandTrigger) > 0.5 && OVRInput.Get(OVRInput.Axis1D.SecondaryIndexTrigger) > 0.5)
-        if (OVRInput.Get(OVRInput.RawButton.RHandTrigger) && OVRInput.Get(OVRInput.Axis1D.SecondaryIndexTrigger) < clashPreventionThreshold)
+        if (OVRInput.Get(OVRInput.RawButton.B))
         {
             // Play the sound effect if it's not already playing
             //if (!audioSource.isPlaying) audioSource.Play();
