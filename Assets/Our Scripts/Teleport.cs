@@ -74,6 +74,7 @@ public class Teleport : MonoBehaviour
                     isSelecting = true;
                 }
 
+                // This must be "GetDown" not "Get" otherwise it will mess up the async calls
                 if (OVRInput.GetDown(OVRInput.RawButton.LIndexTrigger))
                 {
                     // Load scene
@@ -87,7 +88,8 @@ public class Teleport : MonoBehaviour
                 // Here we assume ray hits a teleportable surface
                 lineRenderer.material = teleportableLineMat;
 
-                if (OVRInput.GetDown(OVRInput.RawButton.Y))
+                // This must be "Get" and not "GetDown", otherwise the teleport pointer won't update its location dynamically
+                if (OVRInput.Get(OVRInput.RawButton.Y))
                 {
                     aboutToTeleport = true;
                     teleportTarget = hit.point;

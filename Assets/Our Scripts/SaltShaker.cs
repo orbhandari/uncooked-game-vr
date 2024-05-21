@@ -5,7 +5,7 @@ using UnityEngine;
 public class SaltShaker : MonoBehaviour
 {
     public GameObject prefabToCreate; // Reference to the salt prefab
-    
+
     private Vector3 spawnPosition; // Position where salt is spawned
     [SerializeField] float generationInterval = 1.0f;
     private bool generateObjects = true;
@@ -31,11 +31,11 @@ public class SaltShaker : MonoBehaviour
             float angle = Vector3.Angle(Vector3.up, transform.up);
             spawnPosition = transform.position + transform.up * 0.5f;
 
-            if (angle >= 100.0f && this.GetComponent<CustomObjectProperties>() != null) {
+            if (angle >= 100.0f)
+            {
                 // Instantiate the object prefab
-                // Hack by Om: Only allow pouring AFTER shrinking
-                if (this.GetComponent<CustomObjectProperties>().isShrunk)
-                    Instantiate(prefabToCreate, spawnPosition, Quaternion.identity);
+
+                Instantiate(prefabToCreate, spawnPosition, Quaternion.identity);
             }
 
             // Wait for the specified interval before generating the next object
