@@ -91,7 +91,7 @@ public class DistanceGrab : MonoBehaviour
         Vector3 toBePosition = transform.position + transform.forward * 1f;
         Vector3 moveDirection = (toBePosition - grabbedObject.transform.position).normalized;
 
-        float moveAmount = 3.5f * Time.deltaTime;
+        float moveAmount = 5f * Time.deltaTime;
         isObjectClose |= Vector3.Distance(toBePosition, grabbedObject.transform.position) <= 0.5f;
 
         // Update the position and rotation of the grabbed object to match the controller

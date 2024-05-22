@@ -57,7 +57,7 @@ public class HandController_s : MonoBehaviour
 	void Start()
 	{
 		// Prevent multiple fetch
-		if (anchors_in_the_scene == null) anchors_in_the_scene = GameObject.FindObjectsOfType<ObjectAnchor_s>();
+		anchors_in_the_scene = GameObject.FindObjectsOfType<ObjectAnchor_s>();
 		Debug.LogWarning(anchors_in_the_scene);
 	}
 

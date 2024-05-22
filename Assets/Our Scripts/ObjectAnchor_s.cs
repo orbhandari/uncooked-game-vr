@@ -12,7 +12,7 @@ public class ObjectAnchor_s : MonoBehaviour
     protected Transform initial_transform_parent;
 
 
-    public int maxSliceCount = 3;
+    public int maxSliceCount = 8;
     public int sliceCount = 0;
 
 
