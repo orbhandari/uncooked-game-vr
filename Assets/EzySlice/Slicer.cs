@@ -97,11 +97,11 @@ namespace EzySlice {
 
             // to make things straightforward, exit without slicing if the materials and mesh
             // array don't match. This shouldn't happen anyway
-            if (materials.Length != submeshCount) {
-                Debug.LogWarning("EzySlice::Slice -> Provided Material array must match the length of submeshes.");
+            //if (materials.Length != submeshCount) {
+            //    Debug.LogWarning("EzySlice::Slice -> Provided Material array must match the length of submeshes.");
 
-                return null;
-            }
+            //    return null;
+            //}
 
             // we need to find the index of the material for the cross section.
             // default to the end of the array
