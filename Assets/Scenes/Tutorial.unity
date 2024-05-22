@@ -1422,7 +1422,7 @@ PrefabInstance:
     - target: {fileID: 3069834283169289040, guid: ac5ab8bd313cf470fbc797896a6a1582, type: 3}
       propertyPath: m_text
       value: "Two hand breaking\nGrab the cheese with both hands \nand pull your
-        hands apart\nto break into small pieces!q"
+        hands apart\nto break into small pieces!"
       objectReference: {fileID: 0}
     - target: {fileID: 3069834283169289040, guid: ac5ab8bd313cf470fbc797896a6a1582, type: 3}
       propertyPath: m_fontSize
